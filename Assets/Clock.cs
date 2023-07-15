@@ -18,19 +18,22 @@ public class Clock : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-    DateTime time = DateTime.Now;
-    int hourNow = (int)time.Hour;
-    int minNow = (int) time.Minute;
-    int secNow = (int) time.Second;    
-    Debug.Log(hourNow);
-    Debug.Log(minNow);
-    Debug.Log(secNow);
-    float hXAngle = (float) hourNow;
-    hour.transform.Rotate(90, 0, -90, Space.Self);
-    float mXAngle = (float) minNow;
-    min.transform.Rotate(80, 0, -90, Space.Self);
-    float sXAngle = (float) secNow;
-    sec.transform.Rotate(sXAngle, 0, -90, Space.Self);
+{
+        DateTime time = DateTime.Now;
+        int hourNow = time.Hour;
+        int minNow = time.Minute;
+        int secNow = time.Second;    
+
+        float hXAngle = hourNow * 30f - 90f;
+        if (hXAngle < 0) hXAngle += 360;
+        hour.transform.eulerAngles = new Vector3(hXAngle, 0, 0);
+
+        float mXAngle = minNow * 6f - 90f;
+        if (mXAngle < 0) mXAngle += 360;
+        min.transform.eulerAngles = new Vector3(mXAngle, 0, 0);
+
+        float sXAngle = secNow * 6f - 90f;
+        if (sXAngle < 0) sXAngle += 360;
+        sec.transform.eulerAngles = new Vector3(sXAngle, 0, 0);
     }
 }
